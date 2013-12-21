@@ -17,10 +17,9 @@ void setup()
   frameRate(10);
   offset = 0.0;
   minim = new Minim(this);
-  in = minim.loadFile("sound.wav");
+  in = minim.loadFile("sound.mp3");
   soundlen = in.getMetaData().length();
   size = width / (soundlen / 100.0);
-  size = 0.5;
   in.play();
   stroke(0);
 }
