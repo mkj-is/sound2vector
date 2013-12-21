@@ -2,33 +2,31 @@
 import ddf.minim.*;
 import processing.pdf.*;
 
-Minim       minim;
-//AudioInput  in;
+Minim minim;
 AudioPlayer in;
-float      offset;
-float      size = 1;
-boolean    record = true;
-int        jump = 100;
+float offset;
+float size = 1;
+int soundlen;
+
+static int jump = 100;
 
 void setup()
 {
-  size(1000, 100, PDF, "sound.pdf");
-  
+  size(5000, 100, PDF, "sound.pdf");
+  background(255);
+  frameRate(10);
   offset = 0.0;
   minim = new Minim(this);
-  in = minim.loadFile("music.mp3"); //minim.getLineIn();
+  in = minim.loadFile("sound.wav");
+  soundlen = in.getMetaData().length();
+  size = width / (soundlen / 100.0);
+  size = 0.5;
   in.play();
   stroke(0);
-  beginRecord(PDF, "frame-####.pdf"); 
 }
 
 void draw()
 {
-  if (record) {
-     beginRecord(PDF, "frame-####.pdf");
-     record = false;
-  }
-
   int buffer = in.bufferSize();
   for(int i = 0; i < buffer - jump; i += jump)
   {
@@ -38,19 +36,10 @@ void draw()
   }
   offset += size;
   
-  /*if (record) {
-    endRecord();
-    record = false;
-  }*/
-  
-  if(frameCount == 1000)
+  if(millis() >= soundlen)
   {
     exit();
   }
-}
-
-void keyPressed() {
-  endRecord();
 }
 
 
