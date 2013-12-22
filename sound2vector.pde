@@ -1,14 +1,42 @@
-
+/**
+ *
+ * @file sound2vector.pde
+ *
+ * @author Matěj Kašpar Jirásek <matej.jirasek@gmail.com>
+ * @date 2013-12-22
+ *
+ * @link http://mkj.is
+ *
+ * Processing project which converts music/sound to vector PDF. 
+ */
 import ddf.minim.*;
 import processing.pdf.*;
 
+/**
+ * Minim library
+ */
 Minim minim;
+/**
+ * Player object representing sound/music
+ */
 AudioPlayer in;
+/**
+ * Offset of the drawing function
+ */
 float offset;
-float size = 1;
+/**
+ * Size of one drawn sample
+ */
+float size;
+/**
+ * Length of the sound in miliseconds
+ */
 int soundlen;
 
-static int jump = 100;
+/**
+ * How many values shall be jumped over when drawing
+ */
+static int jump = 50;
 
 void setup()
 {
